@@ -1,0 +1,36 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.9.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+}
+
+group = 'com.mono'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile fileTree(dir: 'ext-lib', include: '*.jar')
+
+	compile("org.springframework.boot:spring-boot-starter-web")
+//	compile group: 'org.springframework.session', name: 'spring-session-jdbc', version: '2.1.8.RELEASE'
+	implementation 'org.springframework.boot:spring-boot-starter'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	testCompile fileTree(dir: 'lib', include: '*.jar')
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testCompile("junit:junit")
+	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+	testCompile group: 'org.springframework', name: 'spring-test'
+}
+
