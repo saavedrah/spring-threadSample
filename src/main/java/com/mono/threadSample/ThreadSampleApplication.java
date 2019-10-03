@@ -27,6 +27,6 @@ public class ThreadSampleApplication {
 		executor.setWaitForTasksToCompleteOnShutdown(true);
 		executor.setThreadNamePrefix("mcd-async-");
 		executor.initialize();
-		return new ContextAwareExecutorDecorator(executor);
+		return executor;
 	}
 }

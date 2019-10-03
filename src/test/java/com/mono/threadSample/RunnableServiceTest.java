@@ -40,7 +40,7 @@ public class RunnableServiceTest {
 
 		resultMap.forEach((key, value) -> {
 			try {
-				LOGGER.info("RESULT FROM RunnableService:" + value.get());
+				LOGGER.info("RESULT from RunnableService:" + value.get());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} catch (ExecutionException e) {

@@ -6,6 +6,7 @@ import org.springframework.core.task.TaskExecutor;
 import java.util.Map;
 import java.util.concurrent.Executor;
 
+@Deprecated
 public class ContextAwareExecutorDecorator implements Executor, TaskExecutor {
 
     private final Executor executor;
