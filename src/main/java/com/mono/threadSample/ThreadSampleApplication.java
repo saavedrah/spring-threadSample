@@ -6,27 +6,33 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.web.context.request.RequestContextListener;
 
 @SpringBootApplication
 @EnableAsync
 public class ThreadSampleApplication {
 
-	public static void main(String[] args) {
-		SpringApplication sa = new SpringApplication(ThreadSampleApplication.class);
+    public static void main(String[] args) {
+        SpringApplication sa = new SpringApplication(ThreadSampleApplication.class);
         sa.setLogStartupInfo(false);
         sa.setBannerMode(Banner.Mode.OFF);
-		sa.run(args);
-	}
+        sa.run(args);
+    }
 
-	@Bean("threadPoolTaskExecutor")
-	public TaskExecutor getAsyncExecutor() {
-		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(10);
-		executor.setMaxPoolSize(20);
-		executor.setWaitForTasksToCompleteOnShutdown(true);
-		executor.setThreadNamePrefix("mcd-async-");
-		executor.initialize();
-		return executor;
-	}
+    @Bean("threadPoolTaskExecutor")
+    public TaskExecutor getAsyncExecutor() {
+        ContextAwarePoolExecutor executor = new ContextAwarePoolExecutor();
+        executor.setCorePoolSize(10);
+        executor.setMaxPoolSize(20);
+        executor.setWaitForTasksToCompleteOnShutdown(true);
+        executor.setThreadNamePrefix("mcd-async-");
+        executor.initialize();
+        return executor;
+    }
+
+    @Bean
+    public RequestContextListener requestContextListener() {
+        return new RequestContextListener();
+    }
+
 }

@@ -26,7 +26,7 @@ public class MainController {
     SessionInfoClass otherParameterClass;
 
     @RequestMapping(value="/testAsync", method= RequestMethod.GET)
-    public void endPointGet(@PathVariable String endPoint,
+    public void endPointGet(
                             HttpServletRequest request,
                             HttpServletResponse response) throws Exception {
 
