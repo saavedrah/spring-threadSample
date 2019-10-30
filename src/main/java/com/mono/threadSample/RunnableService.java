@@ -18,6 +18,9 @@ public class RunnableService {
     @Autowired
     SessionInfoClass sessionInfoClass;
 
+    @Autowired
+    ThreadScopeService service;
+
     @Async("threadPoolTaskExecutor")
     public CompletableFuture<Map> startAsyncProcess(ParameterClass parameterClass, int sleep) throws Exception {
 
@@ -43,4 +46,15 @@ public class RunnableService {
         return CompletableFuture.completedFuture(response);
     }
 
+//    @Async("threadPoolTaskExecutor")
+    @Async
+    public CompletableFuture<Map> objectInstanceTest() {
+        ThreadScopeObject o = ApplicationContextHolder.getContext().getBean(ThreadScopeObject.class);
+
+        LOGGER.info ("Thread object: " + o);
+
+        service.showObject();
+
+        return CompletableFuture.completedFuture(new HashMap<>());
+    }
 }
